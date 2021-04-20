@@ -60,4 +60,4 @@ kruskalMultipleComparison<- function (resp, categ, probs = 0.05, cont = NULL,...
 					critical.dif = lims, difference = ifelse((difv - lims) > 0, TRUE, FALSE)))
 	class(output) <- c("mc", "list")
 	output
-}
+} 
