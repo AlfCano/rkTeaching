@@ -3,6 +3,6 @@ function getDataframe(vars) {
     if (Array.isArray(vars)) {
         return vars.join().split('[[')[0];
     } else {
-        return vars.split('[[')[0];
+        return vars.toString().split('[[')[0];
     }
 }
