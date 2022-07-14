@@ -56,7 +56,7 @@ function printout() {
 	// Header
 	header = new Header(i18n("Kruskal-Wallis test for comparing the distribution of %1 according to %2", variableName, factorName));
 	header.add(i18n("Data frame"), dataframe);
-	header.add(i18n("Comparison of %1 according to %2", variableName, factorName));
+	header.add(i18n("Comparison of"), i18n("%1 according to %2", variableName, factorName));
 	header.add(i18n("Null hypothesis"), i18n("There is no significant difference between the populations"));
 	header.add(i18n("Alternative hypothesis"), i18n("There are significant difference between at least two populations"));
 	if (grouped) {
