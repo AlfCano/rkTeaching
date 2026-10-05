@@ -104,6 +104,7 @@ function calculate() {
       echo('pairs <- glht(lme(' + variableName + '~' + betweenName.join("*") + '*' + withinName.join("*") + ', data = ' + dataframe + '[!is.na(' + dataframe + '$' + variableName + '),], random = ~1|' + caseIdName + '), linfct = mcp(' + betweenName.join("=\"Tukey\",") + '= "Tukey", ' + withinName.join("=\"Tukey\",") + '= "Tukey"))\n');
     }
   }
+  echo('assign("anova.results", anova.results, envir = .GlobalEnv)\n');
 }
 
 function printout() {
@@ -228,8 +229,24 @@ function printout() {
   if (pairwisePlot) {
     echo('rk.header(' + i18n("Pairwise comparison of means plot") + ', level=4)\n');
     echo('rk.graph.on()\n');
-    echo('par(mar=c(4,10,4,2))\n');
-    echo('plot(pairs)\n');
+
+    if (design == 'between') {
+      // Si es 'between', 'pairs' es un data.frame. Usamos ggplot2.
+      echo('require(ggplot2)\n');
+      echo('p <- ggplot(pairs, aes(x = estimate, y = contrast)) +\n');
+      echo('  geom_vline(xintercept = 0, linetype = "dashed", color = "red", linewidth = 1) +\n');
+      echo('  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0.2, color = "darkblue", linewidth = 1) +\n');
+      echo('  geom_point(size = 3, color = "darkblue") +\n');
+      echo('  labs(title = "Comparación de Medias por Pares (Tukey HSD)", subtitle = "Intervalos de confianza al 95%", x = "Diferencia de Medias", y = "Pares Comparados") +\n');
+      echo('  theme_minimal(base_size = 14) +\n');
+      echo('  theme(panel.grid.minor = element_blank())\n');
+      echo('print(p)\n');
+    } else {
+      // Si es 'within' o 'mixed', 'pairs' es un modelo glht. Usamos R base.
+      echo('par(mar=c(4,10,4,2))\n');
+      echo('plot(pairs)\n');
+    }
+
     echo('rk.graph.off()\n');
   }
 }

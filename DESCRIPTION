@@ -2,8 +2,8 @@ Encoding: UTF-8
 Package: rkTeaching
 Type: Package
 Title: A RKWard plugin with basic utilities for teaching Statistics
-Version: 1.4.0.1
-Date: 2025-07-24
+Version: 1.4.0.2
+Date: 2026-10-05
 Author: Alfredo Sánchez Alberca <asalber@ceu.es>
 Maintainer: Alfredo Sánchez Alberca <asalber@ceu.es>
 Enhances: rkward
